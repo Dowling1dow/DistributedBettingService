@@ -1,2 +1,2 @@
-# DistributedBettingService
-This project was part of COMP30220 Distributed Systems at University College Dublin.
+# Distributed Betting Service
+This project was part of the Distributed Systems module at University College Dublin.
