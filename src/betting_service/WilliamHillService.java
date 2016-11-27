@@ -7,12 +7,19 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
+import core.BettingService;
+import core.Fixture;
+import core.FootballMatch;
 
 public class WilliamHillService implements BettingService {
 	
 	public static void main (String args[]) throws IOException{
+		// something here maybe
+	}
+
+	@Override
+	public FootballMatch getBettingData(Fixture fixture) throws IOException {
 //		List<List<String>> allFootballMatches = new ArrayList<List<String>>();
 		Document doc = Jsoup.connect("http://sports.williamhill.com/bet/en-gb/betting/t/295/English+Premier+League.html").get();
 
@@ -23,7 +30,7 @@ public class WilliamHillService implements BettingService {
 		 * TODO: Add a check to make sure there are in fact football matches on Sat, Sun, Mon
 		 */
 		
-		List<Element> tables = new ArrayList<Element>();
+		List<String> tables = new ArrayList<String>();
 		// Get header to check day
 		Elements temp = doc.select("#tup_mkt_grp_tbl_UC_9d8a08d4b13c912153e27659829a27ad");
 		Element matches = temp.first();
@@ -32,13 +39,8 @@ public class WilliamHillService implements BettingService {
 		// TODO: Come up with better way to split the data, regex to split on " + Bets" 
 		String[] allFootballMathes = allMatches.split("\\+");
 		for (String match : allFootballMathes){
-			System.out.println(match);
+			tables.add(match);
 		}
-	}
-
-	@Override
-	public List<String> getBettingData() {
-		
 		
 		return null;
 	}
