@@ -1,6 +1,8 @@
 package core;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,6 +20,7 @@ import com.google.gson.Gson;
 
 public class FootballMatchApplication extends Application{
 	Map<String, FootballMatch> footballMatches = new TreeMap<String, FootballMatch>();
+	List<Fixture> allFixtures = new ArrayList<Fixture>();
 	Gson gson = new Gson();
 	BettingService service;
 	

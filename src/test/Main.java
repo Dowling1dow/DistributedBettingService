@@ -10,9 +10,9 @@ import core.RestletBookie;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-
+		Fixtures service = new Fixtures();
 		RestletBookie broker = new RestletBookie();
-		for (Fixture fixture : Fixtures.getFixtures()) {
+		for (Fixture fixture : service.getFixtures()) {
 			System.out.println("Match: "+ fixture.homeTeam + " vs " + fixture.awayTeam);
 			for(FootballMatch footballMatch : broker.getFootballMatches(fixture)) {
 				System.out.println("MatchID: " + footballMatch.MatchID + 

@@ -20,7 +20,9 @@ public class RestletBookie implements BookieService {
 	public List<FootballMatch> getFootballMatches(Fixture fixture) {
 		Gson gson = new Gson();
 		try {
-			Representation skybet, williamhill;
+			Representation skybet, williamhill, fixtures;
+			fixtures = new ClientResource("http://localhost:8182/fixtures").get();
+			
 			skybet = new ClientResource("http://localhost:8182/skybet/footballMatches").post(gson.toJson(fixture));
 			System.out.println(skybet.getText()); // Text has 'link' and 'MatchID'
 			
