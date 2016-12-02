@@ -1,0 +1,23 @@
+html{
+	
+
+
+background: #000000; 
+background: -webkit-linear-gradient(to left, #000000 , #434343); 
+background: linear-gradient(to left, #000000 , #434343);        
+                
+  
+}
+div{
+	color: white;
+	font:"Comic Sans MS", cursive;
+	font-size:75 px;
+	text-align: center;
+	
+}
+h1
+{
+	font-size: 90 px;
+	color:white;
+	text-align:center;
+}
