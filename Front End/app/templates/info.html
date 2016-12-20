@@ -1,20 +1,52 @@
+
 <head>
+<meta http-equiv="refresh" content="20" >
 <style>
+html{
+
+   
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#627d4d+0,1f3b08+100;Olive+3D */
+background: #627d4d; /* Old browsers */
+background: -moz-linear-gradient(top,  #627d4d 0%, #1f3b08 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #627d4d 0%,#1f3b08 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #627d4d 0%,#1f3b08 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', endColorstr='#1f3b08',GradientType=0 ); /* IE6-9 */
+    
+                 
+}
+body{}
+.bodyfieldset{height: 95%;width: 95%; text-align: center;}
+
 div { 
     display: line;
     
 }
-.rTable { display: table; width: 100%;} 
-.rTableRow { display: table-row; }
-.rTableHeading { background-color: #ddd; display: table-header-group; }
-.rTableCell, .rTableHead { display: table-cell; padding: 3px 10px; border: 1px solid #999999; }
-.rTableHeading { display: table-header-group; background-color: #ddd; font-weight: bold; }
+.rTableHome { display: table; position: absolute;top: 20%;left: 5%;} 
+.fieldhome { width: 10%; height: 15%; position: absolute;top: 20%;left: 5%;}
+.rTable { display: table; width: 0%;position: absolute;top: 10%;left: 5%;} 
+.fieldmain{width: 40%; height:30%;position: absolute;top: 20%;left: 25%;} 
+.rTableAway { display: table; width: 0%; position: absolute;top: 20%;left: 5%;} 
+.fieldaway { width: 10%; height:15%; position: absolute;top: 20%;left: 72%;}
+.rTableHeadtoHead { display: table; width: 0%;position: absolute;top: 20%;left: 5%;} 
+.fieldhead{width: 25%; height:18%;position: absolute;top: 70%;left: 5%;}
+.rTableFact { display: table; width: 0%;position: absolute;top: 10%;left: 5%;} 
+.fieldfact{width: 10%; height:15%;position: absolute;top: 70%;left: 72%;}
+.rTableBet { display: table; width: 0%;position: absolute;top: 70%;left: 40%;}
+.rTableRow { display: table-row;}
+.rTableHeading { background-color: #ddd; display: table-header-group;}
+.rTableCell, .rTableHead { display: table-cell; padding: 3px 10px; border: 1px solid #999999; border: none;} /*  border:none to remove the row n col lines*/
+.rTableHeading { display: table-header-group; background-color: #ddd; font-weight: bold;  }
 .rTableFoot { display: table-footer-group; font-weight: bold; background-color: #ddd; }
 .rTableBody { display: table-row-group; }
-</style>
-</head>
-<body>
 
+</style>
+
+</head>
+
+<body>
+<fieldset class="bodyfieldset">
+<legend><strong> Statistic of Teams </strong></legend>
+<div>
 <h1 style="color: #5e9ca0; text-align: center;">
 	{{fixtures}}
 </h1>
@@ -24,59 +56,269 @@ div {
 <p style="text-align: center;">
 	&nbsp;
 </p>
-<h2>
+<!-- <h2>
 	Info
-</h2>
-<div class="rTable">
+</h2> -->
+<fieldset class="fieldhome">
+<legend><strong>Home Team</strong></legend>
+<div class="rTableHome" >
+<!-- 		<div class="rTableRow">
+			<div class="rTableHead">
+				<strong>
+					Home Team
+				</strong>
+			</div>
+		</div> 
+		<center><div><strong>
+					Home Team
+				</strong></div></center>-->
+		<div class="rTableRow">
+			<div class="rTableCell">
+				Win:
+			</div>
+			<div class="rTableCell">
+				{values}
+			</div>
+		
+		</div>
+
+		<div class="rTableRow">
+			<div class="rTableCell">
+				Draw:
+			</div>
+			<div class="rTableCell">
+				{values}
+			</div>
+		
+		</div>
+	<div class="rTableRow">
+		<div class="rTableCell">
+			Lost:
+		</div>
+		<div class="rTableCell">
+			{values}
+		</div>
+		
+	</div>
+</div>
+</fieldset>
+
+<fieldset class="fieldaway">
+<legend><strong>Away Team</strong></legend>
+<div class="rTableAway" >
+	<!-- 	<div class="rTableRow">
+			<div class="rTableHead">
+				<strong>
+					Away Team
+				</strong>
+			</div>
+		</div> 
+		<div><strong>
+					Away Team
+				</strong></div>-->
+		
+		<div class="rTableRow">
+			<div class="rTableCell">
+				Win:
+			</div>
+			<div class="rTableCell">
+				{values}
+			</div>
+		
+		</div>
+
+		<div class="rTableRow">
+			<div class="rTableCell">
+				Draw:
+			</div>
+			<div class="rTableCell">
+				{values}
+			</div>
+		
+		</div>
+	<div class="rTableRow">
+		<div class="rTableCell">
+			Lost:
+		</div>
+		<div class="rTableCell">
+			{values}
+		</div>
+		
+	</div>
+</div>
+</fieldset>
+<fieldset class="fieldmain">
+<legend><strong>Services Details</strong></legend>
+
+<div class="rTable" >
 	<div class="rTableRow">
 		<div class="rTableHead">
 			<strong>
-				Info 1
+				Betting Services Name
+			</strong>
+		</div>
+		<div class="rTableHead">
+			<strong>
+				Home Team Win
+			</strong>
+		</div>
+		<div class="rTableHead">
+			<!-- <span style="font-weight: bold; border: none;">
+				Draw
+			</span> -->
+			<strong> Draw </strong>
+		</div>
+		<div class="rTableHead">
+			<strong>
+				Away Team Win
+			</strong>&nbsp;
+		</div>
+	</div>
+	<div class="rTableRow">
+		<div class="rTableCell">
+			<img  src="Front End\app\static\Images\Sky_Bet.png"  width="100" height="30" />
+		</div>
+		<div class="rTableCell">
+			{values}
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+	</div>
+	<div class="rTableRow">
+		<div class="rTableCell">
+			<img  src="Front End\app\static\Images\William_Hill.png" width="100" height="30" />
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+	</div>
+	<div class="rTableRow">
+		<div class="rTableCell">
+			<img  src="Front End\app\static\Images\thirdserv.png"  width="100" height="30" />
+		</div>
+		<div class="rTableCell">
+			{values}
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+		<div class="rTableCell">
+			{value}
+		</div>
+	</div>
+</div>
+</div>
+</fieldset>
+
+<fieldset class="fieldhead">
+<legend><strong>Head To Head</strong></legend>
+<div class="rTableHeadtoHead" >
+	<!-- <strong>
+			Head to Head	
+			</strong> -->
+	<div class="rTableRow">
+
+		<div class="rTableHead">
+			<strong>
+				
+			</strong>
+		</div>
+		<div class="rTableHead">
+			<strong>
+				Win
 			</strong>
 		</div>
 		<div class="rTableHead">
 			<span style="font-weight: bold;">
-				Info 2
+				Draw
 			</span>
 		</div>
 		<div class="rTableHead">
-			Info 3 &nbsp;
+			<strong>
+				Lost
+			</strong>&nbsp;
 		</div>
 	</div>
 	<div class="rTableRow">
 		<div class="rTableCell">
-			specifics
+			Home Team
 		</div>
 		<div class="rTableCell">
-			<a href="">
-				are
-			</a>
+			{values}
 		</div>
 		<div class="rTableCell">
-			<img src="images/check.gif" alt="here" />
+			{value}
+		</div>
+		<div class="rTableCell">
+			{value}
 		</div>
 	</div>
 	<div class="rTableRow">
 		<div class="rTableCell">
-			same
+			Away team
 		</div>
 		<div class="rTableCell">
-			<a href="">
-				thing
-			</a>
+			{value}
 		</div>
 		<div class="rTableCell">
-			<img src="images/check.gif" alt="here" />
+			{value}
+		</div>
+		<div class="rTableCell">
+			{value}
 		</div>
 	</div>
 </div>
-<p>
-	<a title="hy" href="hy">
-		betting site here
-	</a>
-</p>
-<p>
-	<a title="Build with" href="https://html-online.com/editor/">
-		Creation tool
-	</a>
-</p>
+</fieldset>
+
+<fieldset class="fieldfact">
+<legend><strong>Facts</strong></legend>
+<div class="rTableFact" >
+	
+		<div class="rTableRow">	<div class="rTableCell"> abc	</div> </div>
+		<div class="rTableRow">	<div class="rTableCell"> xyz</div> </div>
+		<div class="rTableRow">	<div class="rTableCell"> pqr</div> </div>
+
+</div>
+</fieldset>
+
+<div class="rTableBet" >
+	
+		    <form name="info" id="info" method="get" action="info.html">
+
+
+              <fieldset>
+                <legend>Betting</legend>
+                	<p>
+                        <input type="radio" name="bettingsites" id ="skyid" value="skyvalue" />Sky Bet
+                        <input type="radio" name="bettingsites" id ="williamid" value="williamvalue" />William Hill
+                        <input type="radio" name="bettingsites" id="thirdid" value="thirdvalue" />Third site<br />
+
+                     </p>
+                     <p>
+                        <input type="radio" name="test" id ="winid" value="win" />Win
+                        <input type="radio" name="test" id ="drawid" value="williamvalue" />Draw
+                        <input type="radio" name="test" id="looseid" value="loosevalue" />Loose<br />
+
+                     </p>
+                     <p>
+                        <input type="text" name="betamount" id="betamount" value="">
+                        <input type="submit" value="Bet Now" />
+                      </p>
+        </fieldset>   
+    </form>
+</div>
+</div>
+</fieldset>
+</body>
+
+

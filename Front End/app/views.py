@@ -1,10 +1,16 @@
 from flask import Flask
 from flask import render_template, request
 import urllib2, json
+import tablib
 
 fixtures_url = "http://localhost:8182/fixtures"
 
 app = Flask(__name__, static_url_path='/static')
+
+dataset = tablib.Dataset()
+with open(os.path.join(os.path.dirname(__file__),'out.csv')) as f:
+    dataset.csv = f.read()
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
