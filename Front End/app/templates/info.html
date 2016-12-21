@@ -72,7 +72,14 @@ div {
 		<center><div><strong>
 					Home Team
 				</strong></div></center>-->
-		<div class="rTableRow">
+
+		<div>
+		{% for home_result in home_recent_results %}
+			<li>{{home_result}}</li>
+		{% endfor%}
+		</div>
+
+		<!-- <div class="rTableRow">
 			<div class="rTableCell">
 				Win:
 			</div>
@@ -97,7 +104,7 @@ div {
 		</div>
 		<div class="rTableCell">
 			{values}
-		</div>
+		</div> -->
 		
 	</div>
 </div>
@@ -116,8 +123,14 @@ div {
 		<div><strong>
 					Away Team
 				</strong></div>-->
+
+		<div>
+		{% for away_result in away_recent_results %}
+			<li>{{away_result}}</li>
+		{% endfor%}
+		</div>
 		
-		<div class="rTableRow">
+		<!-- <div class="rTableRow">
 			<div class="rTableCell">
 				Win:
 			</div>
@@ -142,7 +155,7 @@ div {
 		</div>
 		<div class="rTableCell">
 			{values}
-		</div>
+		</div> -->
 		
 	</div>
 </div>
@@ -226,56 +239,11 @@ div {
 	<!-- <strong>
 			Head to Head	
 			</strong> -->
-	<div class="rTableRow">
 
-		<div class="rTableHead">
-			<strong>
-				
-			</strong>
-		</div>
-		<div class="rTableHead">
-			<strong>
-				Win
-			</strong>
-		</div>
-		<div class="rTableHead">
-			<span style="font-weight: bold;">
-				Draw
-			</span>
-		</div>
-		<div class="rTableHead">
-			<strong>
-				Lost
-			</strong>&nbsp;
-		</div>
-	</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			Home Team
-		</div>
-		<div class="rTableCell">
-			{values}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-	</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			Away team
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
+	<div>
+		{% for head_to_head in head_to_head_results %}
+			<li>{{head_to_head}}</li>
+		{% endfor%}
 	</div>
 </div>
 </fieldset>
