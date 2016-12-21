@@ -42,5 +42,3 @@ def predict(home_attacking_strength,home_defesnive_strength,away_attacking_stren
 #Arsenal vs Chelsea
 predict(1.6,0.42,2.1,0.69)
 
-#Manchester United vs Burnley
-predict(0.84,0.63,0.21,1.38)
