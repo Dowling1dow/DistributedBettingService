@@ -12,24 +12,25 @@ import core.BettingService;
 import core.Fixture;
 import core.FootballMatch;
 
-public class WilliamHillService implements BettingService {
-	public static final String PREFIX = "WH"; // WilliamHill
+public class BetVictorService implements BettingService {
+	public static final String PREFIX = "BV"; // BetVictor
 	
 	public static void main (String args[]) throws IOException{
-		// something here maybe
+		
 	}
 
 	@Override
 	public FootballMatch getBettingData(Fixture fixture) throws IOException {
-		Document doc = Jsoup.connect("http://sports.williamhill.com/bet/en-gb/betting/t/295/English+Premier+League.html").get();
+		Document doc = Jsoup.connect("http://www.betvictor.com/en/sports/coupons/english-premier-league").get();
 		
 //		List<String> tables = new ArrayList<String>();
-		// Get header to check day
-		Elements temp = doc.select("#tup_mkt_grp_tbl_UC_9d8a08d4b13c912153e27659829a27ad");
+		Elements temp = doc.select("#three_way_outright_coupon-markets");
 		Element matches = temp.first();
-		String allMatches = matches.text(); 
-		String[] allFootballMathes = allMatches.split("\\+|UK");
-		for(int i = 1; i < allFootballMathes.length;i+=2)
+		String allMatches = matches.text();
+//		System.out.println(allMatches);
+
+		String[] allFootballMathes = allMatches.split("[0-9][0-9]:[0-9][0-9]");
+		for(int i = 1; i < allFootballMathes.length;i++)
 		{
 			String match = allFootballMathes[i];
 			{
@@ -39,11 +40,11 @@ public class WilliamHillService implements BettingService {
 				String awayWin;
 				String draw;
 //				tables.add(match);
-				String[] info = match.split("   v   ");
+				String[] info = match.split(" v ");
 				String[] info2 = info[1].split(" ");
 				home = info[0];
-				
-				if(info2.length > 4)
+
+				if(info2.length > 5)
 				{
 					away = info2[0] +" "+ info2[1];
 					homeWin = info2[2];
@@ -60,7 +61,7 @@ public class WilliamHillService implements BettingService {
 				
 				home = home.trim();
 				away = away.trim();
-				FootballMatch footballMatch = new FootballMatch(PREFIX+home+"vs"+away,home,away,homeWin,draw ,awayWin);
+				FootballMatch footballMatch = new FootballMatch(PREFIX+home+"vs"+away,home,away,homeWin,draw,awayWin);
 				String fixtureHome = fixture.homeTeam.replaceAll("\\s+","");
 				String fixtureAway = fixture.awayTeam.replaceAll("\\s+","");
 				if(home.equals(fixtureHome) && away.equals(fixtureAway))
