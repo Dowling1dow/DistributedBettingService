@@ -189,7 +189,7 @@ def info():
 
 @app.route("/info/<team>",  methods=['GET', 'POST'])
 def info_with_team(team):
-	if request.method=='POST':
+	# if request.method=='POST':
 		# print str(team) + " this is ht eteam"
 		# text = request.form['text']
 		# processed_text = text.upper()
@@ -205,24 +205,24 @@ def info_with_team(team):
 		# 	match_string = match['HomeTeam'].replace(" ", "") +"vs"+ match['AwayTeam'].replace(" ", "")
 		# 	fixtures.append(match_string)
 
-		current_fixture = ""
-		for match in fixtures:
-			print match
-			if team in match:
-				current_fixture = match
-				break
-		print current_fixture
+	current_fixture = ""
+	for match in fixtures:
+		print match
+		if team in match:
+			current_fixture = match
+			break
+	print current_fixture
 
-		away_team = current_fixture.split('vs')[1]
-		print away_team
+	away_team = current_fixture.split('vs')[1]
+	print away_team
 
-		return render_template('info.html', fixtures=current_fixture, 
-			home_recent_results=get_recent_results(team), 
-			away_recent_results=get_recent_results(away_team),
-			head_to_head_results=get_head_to_head(team, away_team))
+	return render_template('info.html', fixtures=current_fixture, 
+		home_recent_results=get_recent_results(team), 
+		away_recent_results=get_recent_results(away_team),
+		head_to_head_results=get_head_to_head(team, away_team))
 	
-	else:
-		return "Loading.."
+	# else:
+	# 	return "Something happening"
 
 	# if request.method=='GET':
 	# 		response = urllib2.urlopen(fixtures_url)
