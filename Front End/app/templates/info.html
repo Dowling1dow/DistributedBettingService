@@ -47,115 +47,39 @@ div {
 <fieldset class="bodyfieldset">
 <legend><strong> Statistic of Teams </strong></legend>
 <div>
-<h1 style="color: #5e9ca0; text-align: center;">
-	{{fixtures}}
-</h1>
-<p style="text-align: center;">
-	Match on (Day/ Time)
-</p>
-<p style="text-align: center;">
-	&nbsp;
-</p>
-<!-- <h2>
-	Info
-</h2> -->
+
+<div style="width:350px; height:80px; display:block; display: inline-block; margin:10px">
+	<img src="/static/Images/Team Logos/{{home_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:left">
+	<div style="width:80px; height:80px; display:block; display: inline-block; color: white">
+		<h2 style="position: inherit; top:50%; left:50%">VS</h2>
+	</div> 
+	<img src="/static/Images/Team Logos/{{away_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:right">
+</div>
+
+
 <fieldset class="fieldhome">
-<legend><strong>Home Team</strong></legend>
+<legend><strong>{{home_team_ws}}</strong></legend>
 <div class="rTableHome" >
-<!-- 		<div class="rTableRow">
-			<div class="rTableHead">
-				<strong>
-					Home Team
-				</strong>
-			</div>
-		</div> 
-		<center><div><strong>
-					Home Team
-				</strong></div></center>-->
 
 		<div>
 		{% for home_result in home_recent_results %}
 			<li>{{home_result}}</li>
 		{% endfor%}
 		</div>
-
-		<!-- <div class="rTableRow">
-			<div class="rTableCell">
-				Win:
-			</div>
-			<div class="rTableCell">
-				{values}
-			</div>
-		
-		</div>
-
-		<div class="rTableRow">
-			<div class="rTableCell">
-				Draw:
-			</div>
-			<div class="rTableCell">
-				{values}
-			</div>
-		
-		</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			Lost:
-		</div>
-		<div class="rTableCell">
-			{values}
-		</div> -->
 		
 	</div>
 </div>
 </fieldset>
 
 <fieldset class="fieldaway">
-<legend><strong>Away Team</strong></legend>
+<legend><strong>{{away_team_ws}}</strong></legend>
 <div class="rTableAway" >
-	<!-- 	<div class="rTableRow">
-			<div class="rTableHead">
-				<strong>
-					Away Team
-				</strong>
-			</div>
-		</div> 
-		<div><strong>
-					Away Team
-				</strong></div>-->
 
 		<div>
 		{% for away_result in away_recent_results %}
 			<li>{{away_result}}</li>
 		{% endfor%}
 		</div>
-		
-		<!-- <div class="rTableRow">
-			<div class="rTableCell">
-				Win:
-			</div>
-			<div class="rTableCell">
-				{values}
-			</div>
-		
-		</div>
-
-		<div class="rTableRow">
-			<div class="rTableCell">
-				Draw:
-			</div>
-			<div class="rTableCell">
-				{values}
-			</div>
-		
-		</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			Lost:
-		</div>
-		<div class="rTableCell">
-			{values}
-		</div> -->
 		
 	</div>
 </div>

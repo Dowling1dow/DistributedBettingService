@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import render_template, request
-import urllib2, json
-import csv
+import urllib2, json, csv, re
 import numpy as np 
 
 app = Flask(__name__, static_url_path='/static')
@@ -94,12 +93,6 @@ def predict(team1, team2):
 	return np.random.poisson(0,home_team_goal_expectancy)
 
 
-print predict("ManchesterUnited", "Chelsea")
-
-
-
-
-
 def get_recent_results(team_name):
 	num_of_results = 5
 	match_results = []
@@ -135,9 +128,9 @@ def get_recent_results(team_name):
 	return match_results
 
 
-get_recent_results("ManchesterUnited")
+print get_recent_results("ManchesterCity")
 
-print "##############################"
+# print "##############################"
 
 def get_head_to_head(team_1, team_2):
 	num_of_results = 5
@@ -159,7 +152,7 @@ def get_head_to_head(team_1, team_2):
 
 	return head_to_head_results
 
-get_head_to_head("ManchesterUnited", "Chelsea")
+# print get_head_to_head("Sunderland", "ManchesterUnited")
 
 
 
@@ -169,6 +162,7 @@ get_head_to_head("ManchesterUnited", "Chelsea")
 def index():
 	if request.method=='GET':
 		return render_template('home.html', teams=TEAMS)
+
 	elif request.method=='POST':
 		text = request.form['text']
 		processed_text = text.upper()
@@ -196,27 +190,29 @@ def info_with_team(team):
 		# print str(processed_text)
 	# return processed_text
 
-		# response = urllib2.urlopen(fixtures_url)
-		# # json_raw = response.readlines()
-		# json_object = json.load(response)
-		# # print json_object['Fixtures'][0]
-		# fixtures = []
-		# for match in json_object['Fixtures']:
-		# 	match_string = match['HomeTeam'].replace(" ", "") +"vs"+ match['AwayTeam'].replace(" ", "")
-		# 	fixtures.append(match_string)
-
 	current_fixture = ""
 	for match in fixtures:
 		print match
 		if team in match:
 			current_fixture = match
 			break
-	print current_fixture
+	print "\nCurrentF: "+str(current_fixture)
+	if current_fixture.split('vs')[0] == team:
+		away_team = current_fixture.split('vs')[1]
+	else:
+		away_team = current_fixture.split('vs')[0]
 
-	away_team = current_fixture.split('vs')[1]
-	print away_team
+	print "HomeTeam: "+str(team)
+	print "AwayTeam: "+str(away_team)
 
-	return render_template('info.html', fixtures=current_fixture, 
+	# team names with spaces
+	home_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", team)
+	away_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", away_team)
+
+	return render_template('info.html', home_team=current_fixture.split('vs')[0],
+		away_team=current_fixture.split('vs')[1],
+		home_team_ws=home_team_ws,
+		away_team_ws=away_team_ws,
 		home_recent_results=get_recent_results(team), 
 		away_recent_results=get_recent_results(away_team),
 		head_to_head_results=get_head_to_head(team, away_team))
