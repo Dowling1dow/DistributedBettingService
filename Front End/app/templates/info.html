@@ -1,6 +1,12 @@
 
 <head>
 <meta http-equiv="refresh" content="20" >
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
 <style>
 html{
 
@@ -14,19 +20,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', end
     
                  
 }
-body{}
-.bodyfieldset{height: 95%;width: 95%; text-align: center;}
 
-div { 
-    display: line;
-    
-}
 .rTableHome { display: table; position: absolute;top: 20%;left: 5%;} 
 .fieldhome { width: 10%; height: 15%; position: absolute;top: 20%;left: 5%;}
 .rTable { display: table; width: 0%;position: absolute;top: 10%;left: 5%;} 
-.fieldmain{width: 40%; height:30%;position: absolute;top: 20%;left: 25%;} 
+.fieldmain{width: 45%; height:30%;position: absolute;top: 20%;left: 25%;} 
 .rTableAway { display: table; width: 0%; position: absolute;top: 20%;left: 5%;} 
-.fieldaway { width: 10%; height:15%; position: absolute;top: 20%;left: 72%;}
+.fieldaway { width: 10%; height:15%; position: absolute;top: 20%;right: 5%;}
 .rTableHeadtoHead { display: table; width: 0%;position: absolute;top: 20%;left: 5%;} 
 .fieldhead{width: 25%; height:18%;position: absolute;top: 70%;left: 5%;}
 .rTableFact { display: table; width: 0%;position: absolute;top: 10%;left: 5%;} 
@@ -44,173 +44,159 @@ div {
 </head>
 
 <body>
-<fieldset class="bodyfieldset">
-<legend><strong> Statistic of Teams </strong></legend>
-<div>
+<!-- <fieldset class="bodyfieldset"> -->
+<!-- <legend><strong> Statistic of Teams </strong></legend> -->
+<div class="container">
 
-<div style="width:350px; height:80px; display:block; display: inline-block; margin:10px">
-	<img src="/static/Images/Team Logos/{{home_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:left">
-	<div style="width:80px; height:80px; display:block; display: inline-block; color: white">
-		<h2 style="position: inherit; top:50%; left:50%">VS</h2>
-	</div> 
-	<img src="/static/Images/Team Logos/{{away_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:right">
-</div>
-
-
-<fieldset class="fieldhome">
-<legend><strong>{{home_team_ws}}</strong></legend>
-<div class="rTableHome" >
-
-		<div>
-		{% for home_result in home_recent_results %}
-			<li>{{home_result}}</li>
-		{% endfor%}
-		</div>
-		
-	</div>
-</div>
-</fieldset>
-
-<fieldset class="fieldaway">
-<legend><strong>{{away_team_ws}}</strong></legend>
-<div class="rTableAway" >
-
-		<div>
-		{% for away_result in away_recent_results %}
-			<li>{{away_result}}</li>
-		{% endfor%}
-		</div>
-		
-	</div>
-</div>
-</fieldset>
-<fieldset class="fieldmain">
-<legend><strong>Services Details</strong></legend>
-
-<div class="rTable" >
-	<div class="rTableRow">
-		<div class="rTableHead">
-			<strong>
-				Betting Services Name
-			</strong>
-		</div>
-		<div class="rTableHead">
-			<strong>
-				Home Team Win
-			</strong>
-		</div>
-		<div class="rTableHead">
-			<!-- <span style="font-weight: bold; border: none;">
-				Draw
-			</span> -->
-			<strong> Draw </strong>
-		</div>
-		<div class="rTableHead">
-			<strong>
-				Away Team Win
-			</strong>&nbsp;
+	<div style="width:100%;  text-align: center; background-color: grey">
+		<div style="width:350px; height:80px; display:block; display: inline-block; margin:10px; background-color: lightgrey">
+			<img src="/static/Images/Team Logos/{{home_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:left">
+			<div style="width:80px; height:80px; display:block; display: inline-block; color: white">
+				<h2 style="position: inherit; top:50%; left:50%">VS</h2>
+			</div> 
+			<img src="/static/Images/Team Logos/{{away_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:right">
 		</div>
 	</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			<img  src="/static/Images/Sky_Bet.png"  width="100" height="30" />
+
+	<div class="col-md-3" style="float:left; max-height: 400px; margin-top: 40px;">
+		<div style="background-color: lightgrey">
+			{{home_team_ws}}
+			<br><br>
+			<div>
+				{% for home_result in home_recent_results %}
+					<li>{{home_result}}</li>
+				{% endfor%}
+			</div>
 		</div>
-		<div class="rTableCell">
-			{values}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
+
+		<div style="margin-top: 40px; background-color: lightgrey">
+		Match History
+			{% for head_to_head in head_to_head_results %}
+				<li>{{head_to_head}}</li>
+			{% endfor%}
 		</div>
 	</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			<img  src="/static/Images/William_Hill.png" width="100" height="30" />
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
+
+	<div class="col-md-3" style="float:right; max-height: 400px; margin-top: 40px;">
+		<div style="background-color: lightgrey">
+			{{away_team_ws}}
+			<br><br>
+			<div>
+				{% for away_result in away_recent_results %}
+					<li>{{away_result}}</li>
+				{% endfor%}
+			</div>
 		</div>
 	</div>
-	<div class="rTableRow">
-		<div class="rTableCell">
-			<img  src="/static/Images/betvictor.png"  width="100" height="30" />
-		</div>
-		<div class="rTableCell">
-			{values}
-		</div>
-		<div class="rTableCell">
-			{value}
-		</div>
-		<div class="rTableCell">
-			{value}
+
+	<div class="col-md-6" style="margin-top:40px;">
+		<div style="background-color: lightgrey; height:400px">
+			<div class="rTableRow">
+				<div class="rTableHead">
+					<strong>
+						Betting Services
+					</strong>
+				</div>
+				<div class="rTableHead">
+					<strong>
+						{{home_team_ws}} Win
+					</strong>
+				</div>
+				<div class="rTableHead">
+					<!-- <span style="font-weight: bold; border: none;">
+						Draw
+					</span> -->
+					<strong> Draw </strong>
+				</div>
+				<div class="rTableHead">
+					<strong>
+						{{away_team_ws}} Win
+					</strong>&nbsp;
+				</div>
+
+			</div>
+			
+			<div class="rTableRow">
+				<div class="rTableCell">
+					<img  src="/static/Images/Sky_Bet.png"  width="100" height="30" />
+				</div>
+				<div class="rTableCell">
+					{values}
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+			</div>
+
+			<div class="rTableRow">
+				<div class="rTableCell">
+					<img  src="/static/Images/William_Hill.png" width="100" height="30" />
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+			</div>
+
+			<div class="rTableRow">
+				<div class="rTableCell">
+					<img  src="/static/Images/betvictor.png"  width="100" height="30" />
+				</div>
+				<div class="rTableCell">
+					{values}
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+				<div class="rTableCell">
+					{value}
+				</div>
+			</div>
+
 		</div>
 	</div>
-</div>
-</div>
-</fieldset>
+	<!-- </div> -->
+	<!-- </div> -->
+	<!-- </fieldset> -->
 
-<fieldset class="fieldhead">
-<legend><strong>Match History</strong></legend>
-<div class="rTableHeadtoHead" >
-	<!-- <strong>
-			Head to Head	
-			</strong> -->
+	<div class="col-md-3" style="float:right; max-height: 400px; margin-top: 40px;">
+		<div style="background-color: lightgrey">
+			<form name="info" id="info" method="get" action="info.html">
+	            <legend>Betting</legend>
+	            	<p>
+	                    <input type="radio" name="bettingsites" id ="skyid" value="skyvalue" />Sky Bet
+	                    <input type="radio" name="bettingsites" id ="williamid" value="williamvalue" />William Hill
+	                    <input type="radio" name="bettingsites" id="thirdid" value="thirdvalue" />Third site<br />
 
-	<div>
-		{% for head_to_head in head_to_head_results %}
-			<li>{{head_to_head}}</li>
-		{% endfor%}
+	                </p>
+	                <p>
+	                    <input type="radio" name="test" id ="winid" value="win" />Win
+	                    <input type="radio" name="test" id ="drawid" value="williamvalue" />Draw
+	                    <input type="radio" name="test" id="looseid" value="loosevalue" />Loose<br />
+
+	                </p>
+	                <p>
+	                    <input type="text" name="betamount" id="betamount" value="">
+	                    <input type="submit" value="Bet Now" />
+	                </p>  
+		</form>
+		</div>
 	</div>
-</div>
-</fieldset>
 
-<fieldset class="fieldfact">
-<legend><strong>Facts</strong></legend>
-<div class="rTableFact" >
-	
-		<div class="rTableRow">	<div class="rTableCell"> abc	</div> </div>
-		<div class="rTableRow">	<div class="rTableCell"> xyz</div> </div>
-		<div class="rTableRow">	<div class="rTableCell"> pqr</div> </div>
+
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 </div>
-</fieldset>
-
-<div class="rTableBet" >
-	
-		    <form name="info" id="info" method="get" action="info.html">
-
-
-              <fieldset>
-                <legend>Betting</legend>
-                	<p>
-                        <input type="radio" name="bettingsites" id ="skyid" value="skyvalue" />Sky Bet
-                        <input type="radio" name="bettingsites" id ="williamid" value="williamvalue" />William Hill
-                        <input type="radio" name="bettingsites" id="thirdid" value="thirdvalue" />Third site<br />
-
-                     </p>
-                     <p>
-                        <input type="radio" name="test" id ="winid" value="win" />Win
-                        <input type="radio" name="test" id ="drawid" value="williamvalue" />Draw
-                        <input type="radio" name="test" id="looseid" value="loosevalue" />Loose<br />
-
-                     </p>
-                     <p>
-                        <input type="text" name="betamount" id="betamount" value="">
-                        <input type="submit" value="Bet Now" />
-                      </p>
-        </fieldset>   
-    </form>
-</div>
-</div>
-</fieldset>
 </body>
 
 
