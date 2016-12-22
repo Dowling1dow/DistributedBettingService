@@ -10,6 +10,83 @@
 </head>
 
 <body>
+	<script>
+function getBet() {
+    var site = document.forms["info"]["bettingsites"].value;
+    var outcome = document.forms["info"]["test"].value;
+    var amount = document.forms["info"]["betamount"].value;
+    var result = 0;
+    if (site == "") {
+        alert("Please specify the site you would like to use");
+        return false;
+    }
+    if (outcome == "") {
+        alert("Please specify the outcome you want to bet on");
+        return false;
+    }
+    if (amount == "") {
+        alert("please specify the amount you would like to bet");
+        return false;
+    }
+    alert(site+" "+outcome+" "+amount);
+    switch(site)
+    {
+    	case "skyvalue":
+        	switch(outcome)
+            {
+                case "win":
+					//  sky ods for win * amount
+                     //alert("Sky Win specified");
+                     amount = amount * 2;
+                break;
+
+                case "draw":
+					//  sky ods for draw * amount
+                break;
+
+                case "loose":
+					//  sky ods for lose * amount
+                break;
+            }
+        break;
+        
+        case "williamvalue":
+        	switch(outcome)
+            {
+                case "win":
+					//  william ods for win * amount
+                break;
+
+                case "draw":
+					//  william ods for draw * amount
+                break;
+
+                case "loose":
+					//  william ods for lose * amount
+                break;
+            }
+        break;
+        
+        case "victorvalue":
+        	switch(outcome)
+            {
+                case "win":
+					//  victor ods for win * amount
+                break;
+
+                case "draw":
+					//  victor ods for draw * amount
+                break;
+
+                case "loose":
+					//  victor ods for lose * amount
+                break;
+            }
+        break;
+    }
+     document.getElementById("betresult").innerHTML = result; // the amount of money received
+}
+</script>
 <div class="container">
 
 	<div style="width:100%;  text-align: center; background-color: grey">
@@ -104,19 +181,22 @@
 	            	<p>
 	                    <input type="radio" name="bettingsites" id ="skyid" value="skyvalue" />Sky Bet
 	                    <input type="radio" name="bettingsites" id ="williamid" value="williamvalue" />William Hill
-	                    <input type="radio" name="bettingsites" id="thirdid" value="thirdvalue" />Third site<br />
+	                    <input type="radio" name="bettingsites" id="victorid" value="victorvalue" />Bet Victor<br />
 
 	                </p>
 	                <p>
 	                    <input type="radio" name="test" id ="winid" value="win" />Win
-	                    <input type="radio" name="test" id ="drawid" value="williamvalue" />Draw
-	                    <input type="radio" name="test" id="looseid" value="loosevalue" />Loose<br />
+	                    <input type="radio" name="test" id ="drawid" value="draw" />Draw
+	                    <input type="radio" name="test" id="looseid" value="loose" />Loose<br />
 
 	                </p>
 	                <p>
 	                    <input type="text" name="betamount" id="betamount" value="">
-	                    <input type="submit" value="Bet Now" />
+	                     <input type="button" onclick="validateForm()" value="Bet Now" />
 	                </p>  
+                    	<p id="betresult">
+			    bet outcome
+			</p>
 		</form>
 		</div>
 	</div>
