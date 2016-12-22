@@ -1,6 +1,6 @@
 
 <head>
-<meta http-equiv="refresh" content="20" >
+<!-- <meta http-equiv="refresh" content="20" > -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 
-		<div style="margin-top: 40px; background-color: lightgrey">
+		<div style="margin-top:30px; background-color: lightgrey">
 		Match History
 			{% for head_to_head in head_to_head_results %}
 				<li>{{head_to_head}}</li>
@@ -54,7 +54,7 @@
 	</div>
 
 	<div class="col-md-6" style="margin-top:40px;">
-		<div style="background-color: lightgrey; height:400px">
+		<div style="background-color: lightgrey; height:250px">
 			<table class="table">
 			  <thead class="thead-inverse">
 			    <tr>
@@ -67,15 +67,15 @@
 			  <tbody>
 			    <tr>
 			      <th scope="row"><img src="/static/Images/Sky_Bet.png" style="width:100px; height:30px"></th>
-			      <td><center>0</center></td>
-			      <td><center>0</center></td>
-			      <td><center>0</center></td>
+			      <td><center>{{sky_bet_home_win}}</center></td>
+			      <td><center>{{sky_bet_draw}}</center></td>
+			      <td><center>{{sky_bet_away_win}}</center></td>
 			    </tr>
 			    <tr>
 			      <th scope="row"><img src="/static/Images/William_Hill.png" style="width:100px; height:30px"></th>
-			      <td><center>0</center></td>
-			      <td><center>0</center></td>
-			      <td><center>0</center></td>
+			      <td><center>{{wh_home_win}}</center></td>
+			      <td><center>{{wh_away_win}}</center></td>
+			      <td><center>{{wh_draw}}</center></td>
 			    </tr>
 			    <tr>
 			      <th scope="row"><img src="/static/Images/betvictor.png" style="width:100px; height:30px"></th>
@@ -86,10 +86,19 @@
 			  </tbody>
 			</table>
 		</div>
+
+		<div class="col-md-12" style="height:100px; margin-top: 30px; background-color:lightgrey;">
+			<div>
+				{% for item in predictions%}
+					<li>{{item}}</li>
+				{% endfor %}
+			</div>
+		</div>
+
 	</div>
 
-	<div class="col-md-3" style="float:right; max-height: 400px; margin-top: 40px;">
-		<div style="background-color:lightgrey; padding:7px">
+	<div class="col-md-3" style="float:right; max-height: 400px; margin-top:30px">
+		<div style="background-color:lightgrey; padding:7px;">
 			<form name="info" id="info" method="get" action="info.html">
 	            <legend>Betting</legend>
 	            	<p>

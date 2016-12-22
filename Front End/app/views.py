@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request
 import urllib2, json, csv, re
-import numpy as np 
+import numpy as math 
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -77,20 +77,51 @@ f.close()
 
 del MATCHES[0] # remove columns titles
 del STATS[0] # remove columns titles
-# print str(MATCHES[0].get_home_team())
 
-def predict(team1, team2): 
+def poisson_dist(x,mean):
+    p = math.exp(-mean)
+    for i in xrange(x):
+        p *= mean
+        p /= i + 1
+    return p
+
+def predict(team1, team2):
 	for team in STATS:
-		if team.get_team_name() == team1:
+		if team.get_team_name() in team1 or team.get_team_name() == team1:
+			print "MATCH 1"
 			team1_stats = team
-		elif team.get_team_name() == team2:
+		if team.get_team_name() in team2 or team.get_team_name() == team2:
+			print "MATCH 2"
 			team2_stats = team
 
-	home_team_goal_expectancy = float(team1_stats.get_home_attacking_strength()) * float(team2_stats.get_away_defensive_strength()) * 13.75
-	away_team_goal_expectancy = float(team2_stats.get_home_attacking_strength()) * float(team1_stats.get_away_defensive_strength()) * 10.15
-	
+	#Home team attacking strength * Away Team Defensive Strength * Average Goals Home 1.64
+	home_team_goal_expectancy = float(team1_stats.get_home_attacking_strength()) * float(team2_stats.get_away_defensive_strength())*1.64
+	# Away team attacking strength * Home Team Defensive Strength * Average Goals Away 1.19
+	away_team_goal_expectancy = float(team2_stats.get_away_attacking_strength()) * float(team1_stats.get_home_defensive_strength())*1.19
+	score={}
+	for i in range(0,8):
+		for j in range (0,8):
+			score[i,j]=(poisson_dist(i,home_team_goal_expectancy)*poisson_dist(j,away_team_goal_expectancy))*100
+			score[i,j]=round(score[i,j],2)
 
-	return np.random.poisson(0,home_team_goal_expectancy)
+	home_win=0;
+	away_win=0;
+	draw=0;
+	for i in range(0,8):
+		for j in range(0,8):
+			if(i==j):
+				draw=draw+score[i,j]
+			elif (i<j):
+				away_win=away_win+score[i,j]
+			else:
+				home_win=home_win+score[i,j]
+
+	probabilities = []
+	probabilities.append("Pobability of "+team1+" win is "+str(home_win)+"%")
+	probabilities.append("Probability of Draw is "+str(draw)+"%")
+	probabilities.append("Pobability of "+team2+" win is "+str(away_win)+"%")
+
+	return probabilities
 
 
 def get_recent_results(team_name):
@@ -103,34 +134,24 @@ def get_recent_results(team_name):
 			if match.get_match_result() == "A":
 				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
 				match_results.append(match_string)
-				# print str(team_name) + " lost" + str(match.get_date())
 			else:
 				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
 				match_results.append(match_string)
-				# print str(team_name) + " won!" + str(match.get_date())
 
-			# print ""+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + str(match.get_match_result())+"\n"
 			num_of_results = num_of_results - 1
 
 		elif match.get_away_team() == team_name:
 			if match.get_match_result() == "H":
 				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
 				match_results.append(match_string)
-				# print str(team_name) + " lost" + str(match.get_date())
 			else:
 				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
 				match_results.append(match_string)
-				# print str(team_name) + " won!" + str(match.get_date())
 
-			# print ""+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + str(match.get_match_result())+"\n"
 			num_of_results = num_of_results - 1
 
 	return match_results
 
-
-print get_recent_results("ManchesterCity")
-
-# print "##############################"
 
 def get_head_to_head(team_1, team_2):
 	num_of_results = 5
@@ -151,9 +172,6 @@ def get_head_to_head(team_1, team_2):
 			num_of_results = num_of_results - 1
 
 	return head_to_head_results
-
-# print get_head_to_head("Sunderland", "ManchesterUnited")
-
 
 
 ###### ROUTES BEGIN HERE ######
@@ -183,12 +201,6 @@ def info():
 
 @app.route("/info/<team>",  methods=['GET', 'POST'])
 def info_with_team(team):
-	# if request.method=='POST':
-		# print str(team) + " this is ht eteam"
-		# text = request.form['text']
-		# processed_text = text.upper()
-		# print str(processed_text)
-	# return processed_text
 
 	current_fixture = ""
 	for match in fixtures:
@@ -207,41 +219,39 @@ def info_with_team(team):
 	print "HomeTeam: "+str(home_team)
 	print "AwayTeam: "+str(away_team)
 
-	# team names with spaces
+	# Team names with spaces
 	home_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", home_team)
 	away_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", away_team)
 
-	return render_template('info.html', home_team=current_fixture.split('vs')[0],
+	# Getting SkyBet odds
+	sky_response = urllib2.urlopen("http://localhost:8182/skybet/footballMatches/SB"+home_team+"vs"+away_team)
+	sky_bet_json_object = json.load(sky_response)
+
+	# Getting WilliamHill odds
+	wh_response = urllib2.urlopen("http://localhost:8182/williamhill/footballMatches/WH"+home_team+"vs"+away_team)
+	wh_json_object = json.load(wh_response)
+
+
+	return render_template('info.html', 
+		home_team=current_fixture.split('vs')[0],
 		away_team=current_fixture.split('vs')[1],
+		
 		home_team_ws=home_team_ws,
 		away_team_ws=away_team_ws,
+		predictions=predict(home_team, away_team),
+
+		sky_bet_home_win=sky_bet_json_object['HomeTeamWin'],
+		sky_bet_away_win=sky_bet_json_object['AwayTeamWin'],
+		sky_bet_draw=sky_bet_json_object['Draw'],
+
+		wh_home_win=wh_json_object['HomeTeamWin'],
+		wh_away_win=wh_json_object['AwayTeamWin'],
+		wh_draw=wh_json_object['Draw'],
+
 		home_recent_results=get_recent_results(home_team), 
 		away_recent_results=get_recent_results(away_team),
 		head_to_head_results=get_head_to_head(home_team, away_team))
 	
-	# else:
-	# 	return "Something happening"
 
-	# if request.method=='GET':
-	# 		response = urllib2.urlopen(fixtures_url)
-	# 		# json_raw = response.readlines()
-	# 		json_object = json.load(response)
-	# 		# print json_object['Fixtures'][0]
-	# 		fixtures = []
-	# 		for match in json_object['Fixtures']:
-	# 			match_string = match['HomeTeam'].replace(" ", "") +"vs"+ match['AwayTeam'].replace(" ", "")
-	# 			fixtures.append(match_string)
 
-	# 		return render_template('info.html', fixtures=fixtures)
-			
-		# elif request.method=='POST':
-		# 	print "HLKJKSJKJKJKJSKD"
-		# 	text = request.form['text']
-		# 	processed_text = text.upper()
-		# 	print processed_text
-		# 	return processed_text
-		
-	# 	else:
-	# 		return("ok")
-	
-	# return 'You picked '+str(team_name)
+
