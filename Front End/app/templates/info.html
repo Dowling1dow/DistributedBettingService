@@ -7,45 +7,9 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<style>
-html{
-
-   
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#627d4d+0,1f3b08+100;Olive+3D */
-background: #627d4d; /* Old browsers */
-background: -moz-linear-gradient(top,  #627d4d 0%, #1f3b08 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #627d4d 0%,#1f3b08 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #627d4d 0%,#1f3b08 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', endColorstr='#1f3b08',GradientType=0 ); /* IE6-9 */
-    
-                 
-}
-
-.rTableHome { display: table; position: absolute;top: 20%;left: 5%;} 
-.fieldhome { width: 10%; height: 15%; position: absolute;top: 20%;left: 5%;}
-.rTable { display: table; width: 0%;position: absolute;top: 10%;left: 5%;} 
-.fieldmain{width: 45%; height:30%;position: absolute;top: 20%;left: 25%;} 
-.rTableAway { display: table; width: 0%; position: absolute;top: 20%;left: 5%;} 
-.fieldaway { width: 10%; height:15%; position: absolute;top: 20%;right: 5%;}
-.rTableHeadtoHead { display: table; width: 0%;position: absolute;top: 20%;left: 5%;} 
-.fieldhead{width: 25%; height:18%;position: absolute;top: 70%;left: 5%;}
-.rTableFact { display: table; width: 0%;position: absolute;top: 10%;left: 5%;} 
-.fieldfact{width: 10%; height:15%;position: absolute;top: 70%;left: 72%;}
-.rTableBet { display: table; width: 0%;position: absolute;top: 70%;left: 40%;}
-.rTableRow { display: table-row;}
-.rTableHeading { background-color: #ddd; display: table-header-group;}
-.rTableCell, .rTableHead { display: table-cell; padding: 3px 10px; border: 1px solid #999999; border: none;} /*  border:none to remove the row n col lines*/
-.rTableHeading { display: table-header-group; background-color: #ddd; font-weight: bold;  }
-.rTableFoot { display: table-footer-group; font-weight: bold; background-color: #ddd; }
-.rTableBody { display: table-row-group; }
-
-</style>
-
 </head>
 
 <body>
-<!-- <fieldset class="bodyfieldset"> -->
-<!-- <legend><strong> Statistic of Teams </strong></legend> -->
 <div class="container">
 
 	<div style="width:100%;  text-align: center; background-color: grey">
@@ -91,84 +55,41 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', end
 
 	<div class="col-md-6" style="margin-top:40px;">
 		<div style="background-color: lightgrey; height:400px">
-			<div class="rTableRow">
-				<div class="rTableHead">
-					<strong>
-						Betting Services
-					</strong>
-				</div>
-				<div class="rTableHead">
-					<strong>
-						{{home_team_ws}} Win
-					</strong>
-				</div>
-				<div class="rTableHead">
-					<!-- <span style="font-weight: bold; border: none;">
-						Draw
-					</span> -->
-					<strong> Draw </strong>
-				</div>
-				<div class="rTableHead">
-					<strong>
-						{{away_team_ws}} Win
-					</strong>&nbsp;
-				</div>
-
-			</div>
-			
-			<div class="rTableRow">
-				<div class="rTableCell">
-					<img  src="/static/Images/Sky_Bet.png"  width="100" height="30" />
-				</div>
-				<div class="rTableCell">
-					{values}
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-			</div>
-
-			<div class="rTableRow">
-				<div class="rTableCell">
-					<img  src="/static/Images/William_Hill.png" width="100" height="30" />
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-			</div>
-
-			<div class="rTableRow">
-				<div class="rTableCell">
-					<img  src="/static/Images/betvictor.png"  width="100" height="30" />
-				</div>
-				<div class="rTableCell">
-					{values}
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-				<div class="rTableCell">
-					{value}
-				</div>
-			</div>
-
+			<table class="table">
+			  <thead class="thead-inverse">
+			    <tr>
+			      <th>Betting Service</th>
+			      <th><center>{{home_team_ws}}</center></th>
+			      <th><center>Draw</center></th>
+			      <th><center>{{away_team_ws}}</center></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <th scope="row"><img src="/static/Images/Sky_Bet.png" style="width:100px; height:30px"></th>
+			      <td><center>0</center></td>
+			      <td><center>0</center></td>
+			      <td><center>0</center></td>
+			    </tr>
+			    <tr>
+			      <th scope="row"><img src="/static/Images/William_Hill.png" style="width:100px; height:30px"></th>
+			      <td><center>0</center></td>
+			      <td><center>0</center></td>
+			      <td><center>0</center></td>
+			    </tr>
+			    <tr>
+			      <th scope="row"><img src="/static/Images/betvictor.png" style="width:100px; height:30px"></th>
+			      <td><center>0</center></td>
+			      <td><center>0</center></td>
+			      <td><center>0</center></td>
+			    </tr>
+			  </tbody>
+			</table>
 		</div>
 	</div>
-	<!-- </div> -->
-	<!-- </div> -->
-	<!-- </fieldset> -->
 
 	<div class="col-md-3" style="float:right; max-height: 400px; margin-top: 40px;">
-		<div style="background-color: lightgrey">
+		<div style="background-color:lightgrey; padding:7px">
 			<form name="info" id="info" method="get" action="info.html">
 	            <legend>Betting</legend>
 	            	<p>
@@ -195,7 +116,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#627d4d', end
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
 </div>
 </body>
 

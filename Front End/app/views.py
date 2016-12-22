@@ -198,24 +198,26 @@ def info_with_team(team):
 			break
 	print "\nCurrentF: "+str(current_fixture)
 	if current_fixture.split('vs')[0] == team:
+		home_team = team
 		away_team = current_fixture.split('vs')[1]
 	else:
-		away_team = current_fixture.split('vs')[0]
+		home_team = current_fixture.split('vs')[0]
+		away_team = team
 
-	print "HomeTeam: "+str(team)
+	print "HomeTeam: "+str(home_team)
 	print "AwayTeam: "+str(away_team)
 
 	# team names with spaces
-	home_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", team)
+	home_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", home_team)
 	away_team_ws = re.sub(r"(?<=\w)([A-Z])", r" \1", away_team)
 
 	return render_template('info.html', home_team=current_fixture.split('vs')[0],
 		away_team=current_fixture.split('vs')[1],
 		home_team_ws=home_team_ws,
 		away_team_ws=away_team_ws,
-		home_recent_results=get_recent_results(team), 
+		home_recent_results=get_recent_results(home_team), 
 		away_recent_results=get_recent_results(away_team),
-		head_to_head_results=get_head_to_head(team, away_team))
+		head_to_head_results=get_head_to_head(home_team, away_team))
 	
 	# else:
 	# 	return "Something happening"
