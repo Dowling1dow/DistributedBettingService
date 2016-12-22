@@ -7,8 +7,6 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.select.Elements;
 
 import core.BettingService;
 import core.Fixture;
@@ -38,19 +36,20 @@ public class SkyBetService implements BettingService {
 				String fixtureHome = fixture.homeTeam.replaceAll("\\s+","");
 				String fixtureAway = fixture.awayTeam.replaceAll("\\s+","");
 				
-				System.out.println("1st Home : "+homeTeam);
-				System.out.println("1st Away : "+awayTeam);
-				System.out.println("2nd Home : "+fixtureHome);
-				System.out.println("2nd Away : "+fixtureAway);
+//				System.out.println("SkyBet Home : "+homeTeam);
+//				System.out.println("SkyBet Away : "+awayTeam);
+//				System.out.println("Fixture Home : "+fixtureHome);
+//				System.out.println("Fixtrue Away : "+fixtureAway);
 				
-				if (homeTeam.equals(fixtureHome) && awayTeam.equals(fixtureAway)){
-					String matchID = PREFIX+homeTeam+"vs"+awayTeam;
+				if (homeTeam.equals(fixtureHome) || fixtureHome.toLowerCase().contains(homeTeam.toLowerCase()) && 
+						awayTeam.equals(fixtureAway) || fixtureAway.toLowerCase().contains(awayTeam.toLowerCase())){
+					String matchID = PREFIX+fixtureHome+"vs"+fixtureAway;
 					String homeTeamWin = home.substring(home.lastIndexOf(' ') + 1);
 					String awayTeamWin = away.substring(away.lastIndexOf(' ') + 1);
 					String drawMatch = draw.substring(draw.lastIndexOf(' ') + 1);
-					footballMatch = new FootballMatch(matchID, homeTeam, awayTeam, homeTeamWin, drawMatch, awayTeamWin);
+					footballMatch = new FootballMatch(matchID, fixtureHome, fixtureAway, homeTeamWin, drawMatch, awayTeamWin);
 					allFootballMatches.add(footballMatch);
-					System.out.println(homeTeam+" "+awayTeam+" "+matchID);
+//					System.out.println(fixtureHome+" "+fixtureAway+" "+matchID);
 					return footballMatch;
 				}else{
 					continue;

@@ -46,12 +46,15 @@ public class FootballMatchApplication extends Application{
 					String json = request.getEntityAsText();
 					Fixture fixture = gson.fromJson(json, Fixture.class);
 					try {
-						System.out.println(fixture.homeTeam+" : "+fixture.awayTeam);
-						FootballMatch footballMatch = (FootballMatch) service.getBettingData(fixture);
+						FootballMatch footballMatch = service.getBettingData(fixture);
+						System.out.println("THE FIXTURE: "+fixture.homeTeam+" vs "+fixture.awayTeam);
+						System.out.println("MatchID: "+footballMatch.MatchID);
 						if (footballMatches.containsKey(footballMatch.MatchID)) {
-							// change this, may cause error 
-							// need to allow it to be overwritten
-							response.setStatus(Status.CLIENT_ERROR_FORBIDDEN);
+							System.out.println("Updating "+footballMatch.MatchID);
+							footballMatches.remove(footballMatch.MatchID);
+							footballMatches.put(footballMatch.MatchID, footballMatch);
+							String url = request.getResourceRef().getHostIdentifier() + "/footballMatches/" + footballMatch.MatchID;
+							response.setEntity("{\"MatchID\" : \"" + footballMatch.MatchID + "\", \"link\":\"" + url + "\"}", MediaType.TEXT_PLAIN);
 						} else {
 							footballMatches.put(footballMatch.MatchID, footballMatch);
 							String url = request.getResourceRef().getHostIdentifier() + "/footballMatches/" + footballMatch.MatchID;

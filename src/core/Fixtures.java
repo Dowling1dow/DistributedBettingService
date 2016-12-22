@@ -7,7 +7,6 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /*
  * This class is used to collect the current fixtures that will be used
@@ -27,22 +26,28 @@ public class Fixtures{
 		Document doc = Jsoup.connect("http://www.skysports.ie/premier-league-fixtures").get();
 //		Document doc = Jsoup.connect("http://www.skysports.ie/premier-league-fixtures/december-2016").get(); // for testing
 		
-		Element ul = doc.getElementsByClass("matches__group").first();
-		int count = 1;
+		Element ul = doc.getElementsByClass("fixres__body").first();
+		int count = 3;
+		
+		// There should always be 10 matches happening
+		// we use the variable below to make sure we get all 10
+		int matches = 10;
 		while(true){
 			Fixture fixture = null;
-			String home = ul.select("li:nth-child("+count+") > a > span.matches__item-col.matches__participant.matches__participant--side1 > span > span").text();
-			String away = ul.select("li:nth-child("+count+") > a > span.matches__item-col.matches__participant.matches__participant--side2 > span > span").text();
+			//#widgetLite-5 > div:nth-child(3) > a > span.matches__item-col.matches__participant.matches__participant--side1 > span > span
+			String home = ul.select("div:nth-child("+count+") > a > span.matches__item-col.matches__participant.matches__participant--side1 > span > span").text();
+			String away = ul.select("div:nth-child("+count+") > a > span.matches__item-col.matches__participant.matches__participant--side2 > span > span").text();
 			if (home.isEmpty() || away.isEmpty()){
-				break;
+				count++;
+				continue;
 			}
-//			System.out.println(home);
+			
+			if (matches==0){ break; }
+			matches--;
 			count++;
-//			System.out.println(home+" vs "+away);
 			fixture = new Fixture(home, away);
 			allFixtures.add(fixture);
 		}
-		System.out.println(count-1);
 		return allFixtures;
 	}
 }
