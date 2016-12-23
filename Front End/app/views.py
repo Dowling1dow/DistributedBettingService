@@ -117,9 +117,9 @@ def predict(team1, team2):
 				home_win=home_win+score[i,j]
 
 	probabilities = []
-	probabilities.append("Pobability of "+team1+" win is "+str(home_win)+"%")
-	probabilities.append("Probability of Draw is "+str(draw)+"%")
-	probabilities.append("Pobability of "+team2+" win is "+str(away_win)+"%")
+	probabilities.append(str(home_win)+"%")
+	probabilities.append(str(draw)+"%")
+	probabilities.append(str(away_win)+"%")
 
 	return probabilities
 
@@ -132,21 +132,29 @@ def get_recent_results(team_name):
 		if num_of_results == 0: break
 		if match.get_home_team() == team_name:
 			if match.get_match_result() == "A":
-				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
+				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
 				match_results.append(match_string)
+				match_results.append("#ff5050")
 			else:
-				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
+				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
 				match_results.append(match_string)
+				match_results.append("#66cc66")
 
 			num_of_results = num_of_results - 1
 
 		elif match.get_away_team() == team_name:
 			if match.get_match_result() == "H":
-				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
+				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
 				match_results.append(match_string)
+				match_results.append("#ff5050") 
 			else:
-				match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
+				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
 				match_results.append(match_string)
+				match_results.append("#66cc66")
 
 			num_of_results = num_of_results - 1
 
@@ -161,13 +169,13 @@ def get_head_to_head(team_1, team_2):
 		if num_of_results == 0: break
 		if match.get_home_team() == team_1 and match.get_away_team() == team_2:
 			# print match.get_date()
-			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + str(match.get_match_result())
+			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ ". RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
 			head_to_head_results.append(head_to_head)
 			num_of_results = num_of_results - 1
 
 		elif match.get_away_team() == team_1 and match.get_home_team() == team_2:
 			# print match.get_date()
-			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + str(match.get_match_result())
+			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ ". RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
 			head_to_head_results.append(head_to_head)
 			num_of_results = num_of_results - 1
 

@@ -10,51 +10,69 @@
 </head>
 
 <body>
-<div class="container">
 
-	<div style="width:100%;  text-align: center; background-color: grey">
-		<div style="width:350px; height:80px; display:block; display: inline-block; margin:10px; background-color: lightgrey">
+<center>
+<nav class="navbar navbar-full navbar-light bg-faded" style="width:95%;margin-top:20px; height:100px; background-color: #38003C;">
+  <a class="navbar-brand" href="/" style="padding:0px; margin-top:-30px; margin-left: -5px">
+  	<img src="/static/Images/premier-league-logo-header.svg" style="float:left; width:160px; height:160px;">
+  </a>
+  
+  <div style="width:100%;  text-align: center; margin-left: -300px">
+		<div style="width:350px; height:80px; display:block; display: inline-block; margin:10px; ">
 			<img src="/static/Images/Team Logos/{{home_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:left">
 			<div style="width:80px; height:80px; display:block; display: inline-block; color: white">
-				<h2 style="position: inherit; top:50%; left:50%">VS</h2>
+				<h2 style="position: inherit; top:50%; left:50%;">VS</h2>
 			</div> 
 			<img src="/static/Images/Team Logos/{{away_team}}.png" style="width:80px; height:80px; margin-left:10px margin-right:10px; float:right">
 		</div>
 	</div>
 
-	<div class="col-md-3" style="float:left; max-height: 400px; margin-top: 40px;">
-		<div style="background-color: lightgrey">
-			{{home_team_ws}}
-			<br><br>
+</nav>
+</center>
+
+
+<div class="container">
+	<div class="col-md-3" style="float:left; margin-top: 40px; padding:0px">
+		<div style="background-color: #F6F6F6; box-shadow: 0px 2px 10px #888888; padding:5px">
+			<center><h4>{{home_team_ws}}</h4></center>
 			<div>
-				{% for home_result in home_recent_results %}
-					<li>{{home_result}}</li>
-				{% endfor%}
+				<ul class="list-group" id="homeHistory" style="vertical-align: middle; color:#38003C;;font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">
+						<script type="text/javascript">
+						var current = '<li class="list-group-item" style="background-color:{{home_recent_results[1]}}">'+"{{home_recent_results[0]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{home_recent_results[3]}}">'+"{{home_recent_results[2]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{home_recent_results[5]}}">'+"{{home_recent_results[4]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{home_recent_results[7]}}">'+"{{home_recent_results[6]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{home_recent_results[9]}}">'+"{{home_recent_results[8]}}"+'</li>';
+						document.getElementById('homeHistory').innerHTML = current;
+						</script>
+				</ul>
 			</div>
 		</div>
 
-		<div style="margin-top:30px; background-color: lightgrey">
-		Match History
-			{% for head_to_head in head_to_head_results %}
-				<li>{{head_to_head}}</li>
-			{% endfor%}
+		<div class="col-md-12" style=" margin-top:30px;background-color: #F6F6F6; box-shadow: 0px 2px 5px #888888; padding:5px">
+			<div>
+				<center><h4>Matchup History</h4></center>
+				<ul class="list-group">
+					{% for head_to_head in head_to_head_results %}
+						<li class="list-group-item">{{head_to_head}}</li>
+					{% endfor%}
+				</ul>
+			</div>
 		</div>
 	</div>
 
-	<div class="col-md-3" style="float:right; max-height: 400px; margin-top: 40px;">
-		<div style="background-color: lightgrey">
-			{{away_team_ws}}
-			<br><br>
+	<div class="col-md-3" style="float:right; max-height: 400px; margin-top: 40px; background-color: #F6F6F6; box-shadow: 0px 2px 5px #888888; padding: 5px">
+		<div style="">
+			<center><h4>{{away_team_ws}}</h4></center>
 			<div>
-				{% for away_result in away_recent_results %}
-					<li>{{away_result}}</li>
-				{% endfor%}
+				<ul class="list-group" id="awayHistory" style="vertical-align: middle; color:#38003C;font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">
+					<script type="text/javascript">
+						var current = '<li class="list-group-item" style="background-color:{{away_recent_results[1]}}">'+"{{away_recent_results[0]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{away_recent_results[3]}}">'+"{{away_recent_results[2]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{away_recent_results[5]}}">'+"{{away_recent_results[4]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{away_recent_results[7]}}">'+"{{away_recent_results[6]}}"+'</li>'+'<li class="list-group-item" style="background-color:{{away_recent_results[9]}}">'+"{{away_recent_results[8]}}"+'</li>';
+						document.getElementById('awayHistory').innerHTML = current;
+					</script>
+				</ul>
 			</div>
 		</div>
 	</div>
 
 	<div class="col-md-6" style="margin-top:40px;">
-		<div style="background-color: lightgrey; height:250px">
+		<div style="height:250px; background-color: #F6F6F6; box-shadow: 0px 2px 5px #888888;">
 			<table class="table">
 			  <thead class="thead-inverse">
 			    <tr>
@@ -66,19 +84,19 @@
 			  </thead>
 			  <tbody>
 			    <tr>
-			      <th scope="row"><img src="/static/Images/Sky_Bet.png" style="width:100px; height:30px"></th>
+			      <th scope="row"><a href="https://www.skybet.com/football/premier-league"><img src="/static/Images/Sky_Bet.png" style="width:100px; height:30px"></a></th>
 			      <td><center>{{sky_bet_home_win}}</center></td>
 			      <td><center>{{sky_bet_draw}}</center></td>
 			      <td><center>{{sky_bet_away_win}}</center></td>
 			    </tr>
 			    <tr>
-			      <th scope="row"><img src="/static/Images/William_Hill.png" style="width:100px; height:30px"></th>
+			      <th scope="row"><a href="http://sports.williamhill.com/bet/en-gb/betting/t/295/English-Premier-League.html"><img src="/static/Images/William_Hill.png" style="width:100px; height:30px"></a></th>
 			      <td><center>{{wh_home_win}}</center></td>
 			      <td><center>{{wh_away_win}}</center></td>
 			      <td><center>{{wh_draw}}</center></td>
 			    </tr>
 			    <tr>
-			      <th scope="row"><img src="/static/Images/betvictor.png" style="width:100px; height:30px"></th>
+			      <th scope="row"><a href="http://www.betvictor.com/en/sports/coupons/football-premier-league-matches"><img src="/static/Images/betvictor.png" style="width:100px; height:30px"></a></th>
 			      <td><center>0</center></td>
 			      <td><center>0</center></td>
 			      <td><center>0</center></td>
@@ -87,19 +105,35 @@
 			</table>
 		</div>
 
-		<div class="col-md-12" style="height:100px; margin-top: 30px; background-color:lightgrey;">
+		<div class="col-md-12" style="height:125px; margin-top: 30px; background-color: #F6F6F6; box-shadow: 0px 2px 5px #888888;">
 			<div>
-				{% for item in predictions%}
-					<li>{{item}}</li>
-				{% endfor %}
+				<br>
+				<center>
+				<table class="table" style="vertical-align: middle; color:#38003C;font-family: Arial,Helvetica Neue,Helvetica,sans-serif;">
+				  <thead class="thead-inverse">
+				    <tr>
+				      <th><center>{{home_team_ws}} to win</center></th>
+				      <th><center>Draw</center></th>
+				      <th><center>{{away_team_ws}} to win</center></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td><center>{{predictions[0]}}</center></td>
+				      <td><center>{{predictions[1]}}</center></td>
+				      <td><center>{{predictions[2]}}</center></td>
+				    </tr>
+				  </tbody>
+				</table>
+				</center>
 			</div>
 		</div>
 
 	</div>
 
-	<div class="col-md-3" style="float:right; max-height: 400px; margin-top:30px">
-		<div style="background-color:lightgrey; padding:7px;">
-			<form name="info" id="info" method="get" action="info.html">
+	<div class="col-md-3" style="float:right; max-height: 400px; margin-top:30px; background-color: #F6F6F6; box-shadow: 0px 2px 5px #888888;">
+		<div style=" padding:7px;">
+			<form name="info" id="info" method="" action="getBet()">
 	            <legend>Betting</legend>
 	            	<p>
 	                    <input type="radio" name="bettingsites" id ="skyid" value="skyvalue" />Sky Bet
@@ -115,13 +149,87 @@
 	                </p>
 	                <p>
 	                    <input type="text" name="betamount" id="betamount" value="">
-	                    <input type="submit" value="Bet Now" />
+	                    <input type="button" onclick="getBet()" value="Bet Now" />
 	                </p>  
+	                <p id="betresult">
+			    		bet outcome
+					</p>
 		</form>
 		</div>
 	</div>
 
-
+	<script>
+		function getBet() {
+		    var site = document.forms["info"]["bettingsites"].value;
+		    var outcome = document.forms["info"]["test"].value;
+		    var amount = document.forms["info"]["betamount"].value;
+		    var result = 0;
+		    if (site == "") {
+		        alert("Please specify the site you would like to use");
+		        return false;
+		    }
+		    if (outcome == "") {
+		        alert("Please specify the outcome you want to bet on");
+		        return false;
+		    }
+		    if (amount == "") {
+		        alert("please specify the amount you would like to bet");
+		        return false;
+		    }
+		    alert(site+" "+outcome+" "+amount);
+		    switch(site)
+		    {
+		    	case "skyvalue":
+		        	switch(outcome)
+		            {
+		                case "win":
+							//  sky ods for win * amount
+		                     //alert("Sky Win specified");
+		                     result = amount * 2;
+		                break;
+		                case "draw":
+							//  sky ods for draw * amount
+		                break;
+		                case "loose":
+							//  sky ods for lose * amount
+		                break;
+		            }
+		        break;
+		        
+		        case "williamvalue":
+		        	switch(outcome)
+		            {
+		                case "win":
+							//  william ods for win * amount
+		                break;
+		                case "draw":
+							//  william ods for draw * amount
+		                break;
+		                case "loose":
+							//  william ods for lose * amount
+		                break;
+		            }
+		        break;
+		        
+		        case "victorvalue":
+		        	switch(outcome)
+		            {
+		                case "win":
+							//  victor ods for win * amount
+		                break;
+		                case "draw":
+							//  victor ods for draw * amount
+		                break;
+		                case "loose":
+							//  victor ods for lose * amount
+		                break;
+		            }
+		        break;
+		    }
+		     document.getElementById("betresult").innerHTML = result; // the amount of money received
+		     alert(result);
+		}
+		</script>
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
