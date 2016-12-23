@@ -133,12 +133,12 @@ def get_recent_results(team_name):
 		if match.get_home_team() == team_name:
 			if match.get_match_result() == "A":
 				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
-				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())+"</br>"+str(match.get_home_goals()+" - "+match.get_away_goals())
 				match_results.append(match_string)
 				match_results.append("#ff5050")
 			else:
 				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
-				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())+"</br>"+str(match.get_home_goals()+" - "+match.get_away_goals())
 				match_results.append(match_string)
 				match_results.append("#66cc66")
 
@@ -147,12 +147,12 @@ def get_recent_results(team_name):
 		elif match.get_away_team() == team_name:
 			if match.get_match_result() == "H":
 				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "L"
-				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())+"</br>"+str(match.get_home_goals()+" - "+match.get_away_goals())
 				match_results.append(match_string)
 				match_results.append("#ff5050") 
 			else:
 				# match_string = str(match.get_home_team())+" vs "+str(match.get_away_team())+ " Result: " + "W"
-				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())
+				match_string = str(match.get_home_team())+' vs '+str(match.get_away_team())+"</br>"+str(match.get_home_goals()+" - "+match.get_away_goals())
 				match_results.append(match_string)
 				match_results.append("#66cc66")
 
@@ -169,13 +169,13 @@ def get_head_to_head(team_1, team_2):
 		if num_of_results == 0: break
 		if match.get_home_team() == team_1 and match.get_away_team() == team_2:
 			# print match.get_date()
-			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
+			head_to_head = match.get_date()+"<br/> "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ "<br/>" + str(match.get_home_goals()+" - "+match.get_away_goals())
 			head_to_head_results.append(head_to_head)
 			num_of_results = num_of_results - 1
 
 		elif match.get_away_team() == team_1 and match.get_home_team() == team_2:
 			# print match.get_date()
-			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
+			head_to_head = match.get_date()+"<br/> "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ "<br/>" + str(match.get_home_goals()+" - "+match.get_away_goals())
 			head_to_head_results.append(head_to_head)
 			num_of_results = num_of_results - 1
 
