@@ -156,8 +156,8 @@
 
                 <label for="sel2">Select outcome:</label>
 				  <select class="form-control" id="sel2" name="outcome">
-				    <option>Home</option>
-				    <option>Away</option>
+				    <option>Home to win</option>
+				    <option>Away to win</option>
 				    <option>Draw</option>
 				  </select>
 
@@ -200,13 +200,13 @@
 		        	var draw = "{{sb_draw}}";
 		        	switch(outcome)
 		            {
-		                case "Home":
+		                case "Home to win":
 		                     result = parseFloat(((eval(home) * amount))).toFixed(2);
 		                break;
 		                case "Draw":
 							result = parseFloat(((eval(draw) * amount))).toFixed(2);
 		                break;
-		                case "Away":
+		                case "Away to win":
 							result = parseFloat(((eval(away) * amount))).toFixed(2);
 		                break;
 		            }
@@ -218,13 +218,13 @@
 		        	var draw = "{{wh_draw}}";
 		        	switch(outcome)
 		            {
-		                case "Home":
+		                case "Home to win":
 		                	result = parseFloat(((eval(home) * amount))).toFixed(2);
 		                break;
 		                case "Draw":
 		                	result = parseFloat(((eval(draw) * amount))).toFixed(2);
 		                break;
-		                case "Away":
+		                case "Away to win":
 		                	result = parseFloat(((eval(away) * amount))).toFixed(2);
 		                break;
 		            }
@@ -236,14 +236,14 @@
 		        	var draw = "{{bv_draw}}";
 		        	switch(outcome)
 		            {
-		                case "Home":
+		                case "Home to win":
 		                	result = parseFloat(((eval(home) * amount))).toFixed(2);
 		                break;
 		                case "Draw":
 		                	console.log(eval(away));
 		                	result = parseFloat(((eval(draw) * amount))).toFixed(2);
 		                break;
-		                case "Away":
+		                case "Away to win":
 		                	result = parseFloat(((eval(away) * amount))).toFixed(2);
 		                break;
 		            }
