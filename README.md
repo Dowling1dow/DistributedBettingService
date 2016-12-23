@@ -13,3 +13,12 @@ included in the report in order to assist you with the process.
 
 - You can then visit the localhost url to view the website.
 
+
+You can refer to this YouTube video to troubleshoot any issues which you may encounter setting up Python/Flask :
+https://www.youtube.com/watch?v=n1P6Q8b26dk&feature=youtu.be
+
+
+You can refer to this YouTube video on how to use the application:
+https://www.youtube.com/watch?v=jFKKkOHM9so
+
+
