@@ -169,13 +169,13 @@ def get_head_to_head(team_1, team_2):
 		if num_of_results == 0: break
 		if match.get_home_team() == team_1 and match.get_away_team() == team_2:
 			# print match.get_date()
-			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ ". RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
+			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
 			head_to_head_results.append(head_to_head)
 			num_of_results = num_of_results - 1
 
 		elif match.get_away_team() == team_1 and match.get_home_team() == team_2:
 			# print match.get_date()
-			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ ". RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
+			head_to_head = match.get_date()+": "+str(match.get_home_team())+" vs "+str(match.get_away_team())+ " RESULT: " + str(match.get_home_goals()+" - "+match.get_away_goals())
 			head_to_head_results.append(head_to_head)
 			num_of_results = num_of_results - 1
 
@@ -233,11 +233,15 @@ def info_with_team(team):
 
 	# Getting SkyBet odds
 	sky_response = urllib2.urlopen("http://localhost:8182/skybet/footballMatches/SB"+home_team+"vs"+away_team)
-	sky_bet_json_object = json.load(sky_response)
+	sb_json_object = json.load(sky_response)
 
 	# Getting WilliamHill odds
 	wh_response = urllib2.urlopen("http://localhost:8182/williamhill/footballMatches/WH"+home_team+"vs"+away_team)
 	wh_json_object = json.load(wh_response)
+
+	# Getting BetVictor odds
+	bv_response = urllib2.urlopen("http://localhost:8182/betvictor/footballMatches/BV"+home_team+"vs"+away_team)
+	bv_json_object = json.load(bv_response)
 
 
 	return render_template('info.html', 
@@ -248,13 +252,17 @@ def info_with_team(team):
 		away_team_ws=away_team_ws,
 		predictions=predict(home_team, away_team),
 
-		sky_bet_home_win=sky_bet_json_object['HomeTeamWin'],
-		sky_bet_away_win=sky_bet_json_object['AwayTeamWin'],
-		sky_bet_draw=sky_bet_json_object['Draw'],
+		sb_home_win=sb_json_object['HomeTeamWin'],
+		sb_away_win=sb_json_object['AwayTeamWin'],
+		sb_draw=sb_json_object['Draw'],
 
 		wh_home_win=wh_json_object['HomeTeamWin'],
 		wh_away_win=wh_json_object['AwayTeamWin'],
 		wh_draw=wh_json_object['Draw'],
+
+		bv_home_win=bv_json_object['HomeTeamWin'],
+		bv_away_win=bv_json_object['AwayTeamWin'],
+		bv_draw=bv_json_object['Draw'],
 
 		home_recent_results=get_recent_results(home_team), 
 		away_recent_results=get_recent_results(away_team),

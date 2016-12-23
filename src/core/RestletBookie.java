@@ -22,32 +22,30 @@ public class RestletBookie implements BookieService {
 		List<FootballMatch> matchOdds = new LinkedList<FootballMatch>();
 		Gson gson = new Gson();
 		try {
-			Representation skybet, williamhill;
-			FootballMatch skybetMatch, williamHillMatch;
-//			fixtures = new ClientResource("http://localhost:8182/fixtures").get();
-			
-			// Getting SkyBet odds
+			Representation skybet, williamhill, betvictor;
+			FootballMatch skybetMatch, williamHillMatch, betvictorMatch;
+
 			skybet = new ClientResource("http://localhost:8182/skybet/footballMatches").post(gson.toJson(fixture));
-			// Getting William Hill odds
 			williamhill = new ClientResource("http://localhost:8182/williamhill/footballMatches").post(gson.toJson(fixture));
+			betvictor = new ClientResource("http://localhost:8182/betvictor/footballMatches").post(gson.toJson(fixture));
 			
-//			System.out.println(skybet.getText()); // Text has 'link' and 'MatchID'
 			skybetMatch = gson.fromJson(skybet.getText(), FootballMatch.class);
 			williamHillMatch = gson.fromJson(williamhill.getText(), FootballMatch.class);
+			betvictorMatch = gson.fromJson(betvictor.getText(), FootballMatch.class);
 			
-//			System.out.println(skybetMatch.MatchID);
-//			System.out.println("http://localhost:8182/skybet/footballMatches/"+skybetMatch.MatchID);
-			
-			Representation skybetRep, williamHillRep;
+			Representation skybetRep, williamHillRep, betvictorRep;
 			skybetRep = new ClientResource("http://localhost:8182/skybet/footballMatches/"+skybetMatch.MatchID).get();
 			skybetMatch = gson.fromJson(skybetRep.getText(), FootballMatch.class);
 			
 			williamHillRep = new ClientResource("http://localhost:8182/williamhill/footballMatches/"+williamHillMatch.MatchID).get();
 			williamHillMatch = gson.fromJson(williamHillRep.getText(), FootballMatch.class);
-//			System.out.println(skybetMatch.HomeTeamWin);
+			
+			betvictorRep = new ClientResource("http://localhost:8182/betvictor/footballMatches/"+betvictorMatch.MatchID).get();
+			betvictorMatch = gson.fromJson(betvictorRep.getText(), FootballMatch.class);
 			
 			matchOdds.add(skybetMatch);
 			matchOdds.add(williamHillMatch);
+			matchOdds.add(betvictorMatch);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
