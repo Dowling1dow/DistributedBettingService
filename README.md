@@ -1,5 +1,4 @@
 # Distributed Betting Service
-This project was part of the Distributed Systems module at University College Dublin.
 
 The following are instructions on how to run 
 
